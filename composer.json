@@ -1,0 +1,19 @@
+{
+    "name": "devlucid/router",
+    "description": "A simple php routing library",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mike Thorn",
+            "email": "mthorn@devlucid.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.2.0"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {"DevLucid\\Router": "src/router.php"}
+    },
+}
