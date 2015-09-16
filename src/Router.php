@@ -1,7 +1,7 @@
 <?php
 
-
-class DevLucid\Router
+namespace DevLucid;
+class Router
 {
     public static function init()
     {
