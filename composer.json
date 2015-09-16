@@ -14,6 +14,7 @@
     },
     "minimum-stability": "dev",
     "autoload": {
-        "psr-4": { "DevLucid\\Router\\": "" }
+        "psr-4": { "DevLucid\\": "" }
     }
+
 }
