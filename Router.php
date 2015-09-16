@@ -31,7 +31,6 @@ class Router
 
     public static function controller($name)
     {
-        error_log('trying to load controller: '.$name);
         $router = Router::get_instance();
         $controller_path  = $router->controller_path.$name.'.php';
         $controller_class = $name .'_controller';
