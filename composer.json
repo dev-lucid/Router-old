@@ -1,5 +1,5 @@
 {
-    "name": "dev-lucid/router",
+    "name": "devlucid/router",
     "description": "A simple php routing library",
     "type": "library",
     "license": "MIT",
