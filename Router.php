@@ -91,7 +91,7 @@ class Router
         if (isset($_REQUEST[$this->parameter_name]))
         {
             $parts = explode('/',$_REQUEST[$this->parameter_name]);
-            print_r($parts);
+            
             if (count($parts) !== 2)
             {
                 throw new \Exception('Invalid format for router parameter. The format should be [controller]/[Method name], or view/[view name]. ');
@@ -107,6 +107,15 @@ class Router
                 $method_name = $parts[1];
                 $controller->$method_name();
             }
+        }
+        else
+        {
+            $router = Router::get_instance();
+            if (is_object($router->logger))
+            {
+                $router->logger->error('Could not find valid routing parameter. Expected to find parameter named '.$this->parameter_name.' in $_REQUEST');
+            }
+            throw new \Exception('Could not find valid routing parameter. Expected to find parameter named '.$this->parameter_name.' in $_REQUEST');
         }
     }
 }
