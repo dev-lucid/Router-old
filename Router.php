@@ -12,6 +12,7 @@ class Router
         $this->view_path       = null;
         $this->mode            = 'parameter';
         $this->parameter_name  = 'todo';
+        $this->default_todo    = 'view/index';
         $this->logger          = null;
     }
 
@@ -87,34 +88,27 @@ class Router
 
     public function process()
     {
-        if (isset($_REQUEST[$this->parameter_name]))
+        if (!isset($_REQUEST[$this->parameter_name]))
         {
-            $parts = explode('/',$_REQUEST[$this->parameter_name]);
-            
-            if (count($parts) !== 2)
-            {
-                throw new \Exception('Invalid format for router parameter. The format should be [controller]/[Method name], or view/[view name]. ');
-            }
+            $_REQUEST[$this->parameter_name] = $this->default_todo;
+        }
+        $parts = explode('/',$_REQUEST[$this->parameter_name]);
+        
+        if (count($parts) !== 2)
+        {
 
-            if ($parts[0] == 'view')
-            {
-                \DevLucid\Router::view($parts[1]);
-            }
-            else
-            {
-                $controller = \DevLucid\Router::controller($parts[0]);
-                $method_name = $parts[1];
-                $controller->$method_name();
-            }
+            throw new \Exception('Invalid format for router parameter. The format should be [controller]/[Method name], or view/[view name]. ');
+        }
+
+        if ($parts[0] == 'view')
+        {
+            \DevLucid\Router::view($parts[1]);
         }
         else
         {
-            $router = Router::get_instance();
-            if (is_object($router->logger))
-            {
-                $router->logger->error('Could not find valid routing parameter. Expected to find parameter named '.$this->parameter_name.' in $_REQUEST');
-            }
-            throw new \Exception('Could not find valid routing parameter. Expected to find parameter named '.$this->parameter_name.' in $_REQUEST');
+            $controller = \DevLucid\Router::controller($parts[0]);
+            $method_name = $parts[1];
+            $controller->$method_name();
         }
     }
 }
