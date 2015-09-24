@@ -83,8 +83,9 @@ class Router
             throw new \Exception('Could not locate view file. Expected to find '.$view_path);
         }
 
-        include($view_path);
+        return include($view_path);
     }
+
 
     public function process()
     {
